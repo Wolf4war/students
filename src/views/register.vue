@@ -176,13 +176,15 @@ export default {
         this.fname == "" ||
         this.lname == "" ||
         this.phoneNumber == "" ||
-        this.email == "" ||
-        this.password == "" ||
-        this.confirmPassword == ""
+        this.email == ""
       ) {
         this.onError = true;
         this.errMsg = "Please fill all the fields";
       } else {
+        if (this.password !== this.confirmPassword) {
+          alert("Passwords are not matching");
+          return; // Return to prevent further execution
+        }
         createUserWithEmailAndPassword(getAuth(), this.email, this.password)
           .then(() => {
             this.AddData();
